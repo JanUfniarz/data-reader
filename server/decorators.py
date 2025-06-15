@@ -8,6 +8,6 @@ def endpoint(app, route):
         @app.route(route, methods=["POST"])
         @wraps(func)
         def wrapped():
-            return func(json_data = request.get_json())
+            return func(request.get_json())
         return wrapped
     return decorator
