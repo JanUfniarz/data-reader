@@ -1,6 +1,6 @@
 from functools import wraps
 
-from flask import request
+from flask import request, jsonify
 
 
 def endpoint(app, route):
@@ -8,6 +8,6 @@ def endpoint(app, route):
         @app.route(route, methods=["POST"])
         @wraps(func)
         def wrapped():
-            return func(request.get_json())
+            return jsonify(func(request.get_json()))
         return wrapped
     return decorator

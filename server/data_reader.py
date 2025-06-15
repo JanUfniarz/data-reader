@@ -3,6 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from flask import Flask
 
 from server.agents.agent import Agent
+from server.data_service import DataService
 from server.decorators import endpoint
 
 
@@ -25,11 +26,13 @@ class DataReader:
         @endpoint(self.app, "/setup/")
         def setup(data):
             Agent.model = data.get("model")
+            return dict(message="setup completed")
 
         @endpoint(self.app, '/data/')
         def set_dataset(data):
-            self.data_service.set_dataset(data.get('dataset'))
+            self.data_service.set_dataset(data.get('dataset'), data.get('table_name'))
             Agent.data_structure = self.data_service.get_structure()
+            return dict(message="dataset transferred")
 
         @endpoint(self.app, "/call/")
         def call(data):
@@ -44,3 +47,12 @@ class DataReader:
                 result = future_result.result()
 
             summarization: str = self.summarize_data(result)
+            return dict(
+                message="success",
+                description=description,
+                summarization=summarization
+            )
+
+    def run(self):
+        self.listen()
+        self.app.run(host='0.0.0.0')

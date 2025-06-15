@@ -20,16 +20,3 @@ class Agent:
 
         response = post(self.path, json=data, stream=True)
         return response.json()["response"]
-
-
-class QueryGenerator(Agent):
-    def __call__(self, prompt: str) -> str:\
-        return super()(prompt)
-
-class QueryDescriber(Agent):
-    def __call__(self, query) -> str:
-        return super()(query)
-
-class DataSummarizer(Agent):
-    def __call__(self, data: str) -> str:
-        return super()(data)
