@@ -1,19 +1,19 @@
 from requests import post
 
-class Agent:
-    model: str | None = None
-    data_structure: str | None = None
+from server.services.user_data_storage import UserDataStorage
 
+
+class Agent(UserDataStorage):
     def __init__(self):
         self.path: str = "http://ollama:11434/api/generate"
 
-
-    def __call__(self, input_: str) -> str:
-        if not self.model:
+    def __call__(self, input_: str, uid: str) -> str:
+        model: str = self.user(uid).model
+        if not model:
             raise Exception("model not provided")
 
         data = dict(
-            model=self.model,
+            model=model,
             prompt=input_,
             stream=False
         )

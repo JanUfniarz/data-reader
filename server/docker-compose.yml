@@ -8,11 +8,11 @@ services:
     expose:
       - 11434
     volumes:
-      - ../data/models:/root/.ollama
+      - ../../my_tools/ollama/data/ollama_data:/root/.ollama
 
   reader:
     build:
       context:
         .
     ports:
-      - "8080:8080"
+      - "8080:5000"

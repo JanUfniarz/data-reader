@@ -4,6 +4,6 @@ WORKDIR /usr/src
 
 COPY . .
 
-# RUN pip install
+RUN pip install flask duckdb tabulate requests
 
-CMD ["python", "data_reader.py"]
+CMD ["python", "run.py"]
