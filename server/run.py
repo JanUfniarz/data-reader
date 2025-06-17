@@ -20,7 +20,7 @@ def default_reader_config():
         ),
         data_service
     )
-    
+
 
 if __name__ == "__main__":
     data_reader = default_reader_config()

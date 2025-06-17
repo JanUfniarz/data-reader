@@ -3,7 +3,7 @@ import io
 from duckdb.duckdb import DuckDBPyConnection
 from tabulate import tabulate
 
-from server.services.user_data_storage import UserDataStorage, UserData
+from .user_data_storage import UserDataStorage, UserData
 
 
 class DataService(UserDataStorage):

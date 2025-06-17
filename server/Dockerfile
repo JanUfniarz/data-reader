@@ -2,8 +2,8 @@ FROM python:latest
 
 WORKDIR /usr/src
 
-COPY . .
+COPY . server/
 
 RUN pip install flask duckdb tabulate requests
 
-CMD ["python", "run.py"]
+CMD ["python", "-m", "server.run"]
