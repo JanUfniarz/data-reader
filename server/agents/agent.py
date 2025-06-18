@@ -1,14 +1,14 @@
 from requests import post
 
-from server.services.user_data_storage import UserDataStorage
+from server.services.session_data_storage import SessionDataStorage
 
 
-class Agent(UserDataStorage):
+class Agent(SessionDataStorage):
     def __init__(self):
         self.path: str = "http://ollama:11434/api/generate"
 
-    def __call__(self, input_: str, uid: str) -> str:
-        model: str = self.user(uid).model
+    def __call__(self, input_: str, sid: str) -> str:
+        model: str = self.user(sid).model
         if not model:
             raise Exception("model not provided")
 

@@ -8,8 +8,8 @@ class DataSummarizer(Agent):
     Do not return anything except the paragraph.
     """
 
-    def __call__(self, data: str, uid: str) -> str:
+    def __call__(self, data: str, sid: str) -> str:
         return super()("\n".join([
             f"System prompt: {self.SYSTEM_PROMPT}",
             f"Data: \n{data}"
-        ]), uid)
+        ]), sid)

@@ -5,7 +5,7 @@ from flask import jsonify, request
 
 from server.services.data_service import DataService
 from server.services.reader import Reader
-from server.services.user_data_storage import UserDataStorage
+from server.services.session_data_storage import SessionDataStorage
 
 
 def endpoint(app, route):
@@ -18,7 +18,7 @@ def endpoint(app, route):
     return decorator
 
 
-class Controller(UserDataStorage):
+class Controller(SessionDataStorage):
     def __init__(
             self,
             app: Flask,
@@ -32,13 +32,13 @@ class Controller(UserDataStorage):
     def listen(self):
         @endpoint(self.app, "/setup/")
         def setup(data):
-            self.add_user(data.get("uid"), model=data.get("model"))
+            self.add_user(data.get("sid"), model=data.get("model"))
             return dict(message="setup completed")
 
         @endpoint(self.app, '/data/')
         def set_dataset(data):
             self.data_service.set_dataset(
-                data.get("uid"),
+                data.get("sid"),
                 data.get('dataset'),
                 data.get('table_name')
             )
@@ -48,7 +48,7 @@ class Controller(UserDataStorage):
         def call(data):
             description, result, summarization = self.process_data(
                 data.get("prompt"),
-                data.get("uid")
+                data.get("sid")
             )
 
             return dict(

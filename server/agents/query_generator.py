@@ -11,9 +11,9 @@ class QueryGenerator(Agent):
     that searches the table according to the user's prompt.
     """
 
-    def __call__(self, prompt: str, uid: str) -> str:
+    def __call__(self, prompt: str, sid: str) -> str:
         return super()("\n".join([
             f"System prompt: {self.SYSTEM_PROMPT}",
-            f"Table structure {self.user(uid).data_structure}",
+            f"Table structure {self.user(sid).data_structure}",
             f"User prompt: {prompt}"
-        ]), uid)
+        ]), sid)

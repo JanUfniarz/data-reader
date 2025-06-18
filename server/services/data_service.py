@@ -3,12 +3,12 @@ import io
 from duckdb.duckdb import DuckDBPyConnection
 from tabulate import tabulate
 
-from .user_data_storage import UserDataStorage, UserData
+from .session_data_storage import SessionDataStorage, SessionData
 
 
-class DataService(UserDataStorage):
-    def set_dataset(self, uid:  str, dataset, table_name: str):
-        user = self.user(uid)
+class DataService(SessionDataStorage):
+    def set_dataset(self, sid:  str, dataset, table_name: str):
+        user = self.user(sid)
         buffer = io.StringIO(dataset)
 
         # language=POSTGRES-PSQL
@@ -18,10 +18,10 @@ class DataService(UserDataStorage):
         user.table_name = table_name
         user.data_structure = _get_structure(user)
 
-    def execute_query(self, uid:  str, query: str) -> str:
-        return _md(self.user(uid).cursor.execute(query))
+    def execute_query(self, sid:  str, query: str) -> str:
+        return _md(self.user(sid).cursor.execute(query))
 
-def _get_structure(user:  UserData):
+def _get_structure(user:  SessionData):
 
     # language=SQLITE-SQL
     structure_query = """

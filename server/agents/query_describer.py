@@ -10,9 +10,9 @@ class QueryDescriber(Agent):
     Do not include anything except the description.
     """
 
-    def __call__(self, query, uid: str) -> str:
+    def __call__(self, query, sid: str) -> str:
         return super()("\n".join([
             f"System prompt: {self.SYSTEM_PROMPT}",
-            f"Table structure {self.user(uid).data_structure}",
+            f"Table structure {self.user(sid).data_structure}",
             f"Query: {query}"
-        ]), uid)
+        ]), sid)
