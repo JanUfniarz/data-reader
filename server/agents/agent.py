@@ -8,7 +8,7 @@ class Agent(SessionDataStorage):
         self.path: str = "http://ollama:11434/api/generate"
 
     def __call__(self, input_: str, sid: str) -> str:
-        model: str = self.user(sid).model
+        model: str = self.session(sid).model
         if not model:
             raise Exception("model not provided")
 

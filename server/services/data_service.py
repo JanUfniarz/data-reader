@@ -8,7 +8,7 @@ from .session_data_storage import SessionDataStorage, SessionData
 
 class DataService(SessionDataStorage):
     def set_dataset(self, sid:  str, dataset, table_name: str):
-        user = self.user(sid)
+        user = self.session(sid)
         buffer = io.StringIO(dataset)
 
         # language=POSTGRES-PSQL
@@ -19,7 +19,7 @@ class DataService(SessionDataStorage):
         user.data_structure = _get_structure(user)
 
     def execute_query(self, sid:  str, query: str) -> str:
-        return _md(self.user(sid).cursor.execute(query))
+        return _md(self.session(sid).cursor.execute(query))
 
 def _get_structure(user:  SessionData):
 

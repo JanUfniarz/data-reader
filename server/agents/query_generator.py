@@ -14,6 +14,6 @@ class QueryGenerator(Agent):
     def __call__(self, prompt: str, sid: str) -> str:
         return super()("\n".join([
             f"System prompt: {self.SYSTEM_PROMPT}",
-            f"Table structure {self.user(sid).data_structure}",
+            f"Table structure {self.session(sid).data_structure}",
             f"User prompt: {prompt}"
         ]), sid)
