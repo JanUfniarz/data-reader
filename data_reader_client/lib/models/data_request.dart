@@ -10,7 +10,7 @@ class DataRequest {
   @JsonKey(name: 'table_name')
   final String name;
   final String dataset;
-  final String sid = getSessionID();
+  final String sid = getSID();
 
   DataRequest({required this.name, required this.dataset});
 

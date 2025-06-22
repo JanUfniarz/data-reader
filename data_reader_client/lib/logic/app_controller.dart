@@ -1,9 +1,12 @@
 import 'package:data_reader_client/database/dataset_dao.dart';
 import 'package:data_reader_client/logic/connector.dart';
+import 'package:data_reader_client/logic/get_session_id.dart';
+import 'package:data_reader_client/main.dart';
 import 'package:data_reader_client/models/dataset.dart';
 import 'package:data_reader_client/models/response.dart';
 import 'package:data_reader_client/widgets/dataset_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AppController extends ChangeNotifier {
   final DatasetDao dao;
@@ -12,6 +15,8 @@ class AppController extends ChangeNotifier {
   AppController({required this.dao, required this.connector}) {
     loadData();
   }
+
+  factory AppController.of(BuildContext context) => context.watch<AppController>();
 
   List<Dataset>? sets;
   Map<int, String>? names;
@@ -46,7 +51,7 @@ class AppController extends ChangeNotifier {
   }
 
   void ask(String prompt, Dataset dataset) async {
-    Response response = (await connector.analyze(prompt)).toResponse();
+    Response response = (await connector.analyze(prompt, getSID())).toResponse();
     dataset.responses.add(
         await dao.insertResponse(response, datasetId: dataset.id!)
     );

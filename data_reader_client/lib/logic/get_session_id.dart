@@ -1,6 +1,6 @@
 import 'dart:math';
 
-String getSessionID() => _IDGenerator.val;
+String getSID() => _IDGenerator.val;
 
 class _IDGenerator {
   static const _lowercase = 'abcdefghijklmnopqrstuvwxyz';

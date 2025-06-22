@@ -12,7 +12,7 @@ class Connector {
 
   void sendDataset(DataRequest request) => _apiCall('data', request.toJson());
 
-  Future<CallResponse> analyze(String prompt, int sid) async => CallResponse
+  Future<CallResponse> analyze(String prompt, String sid) async => CallResponse
       .fromJson((jsonDecode((await _apiCall('analyze', {
         'prompt': prompt,
         'sid': sid

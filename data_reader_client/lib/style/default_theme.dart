@@ -52,7 +52,10 @@ ThemeData defaultTheme = ThemeData(
   ),
 
 
-    inputDecorationTheme: InputDecorationTheme(
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: palette[Col.secondary],
+    hintStyle: textDefaultTheme.titleMedium,
     focusedBorder: UnderlineInputBorder(
       borderSide: BorderSide(color: palette[Col.primary]!, width: 2),
     ),
@@ -61,7 +64,7 @@ ThemeData defaultTheme = ThemeData(
   dividerTheme: DividerThemeData(
     color: palette[Col.primary],
     thickness: 2
-  )
+  ),
 
 );
 
