@@ -16,7 +16,9 @@ class AppController extends ChangeNotifier {
     loadData();
   }
 
-  factory AppController.of(BuildContext context) => context.watch<AppController>();
+  factory AppController.of(BuildContext context, {bool listen = false}) => listen
+      ? context.watch<AppController>()
+      : context.read<AppController>();
 
   List<Dataset>? sets;
   Map<int, String>? names;
@@ -37,9 +39,11 @@ class AppController extends ChangeNotifier {
         name: name,
         data: data
     );
+
     dataset = await dao.insertDataset(dataset);
     sets!.add(dataset);
     notifyListeners();
+
     openDataset(dataset, context);
   }
 
